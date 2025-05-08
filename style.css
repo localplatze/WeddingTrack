@@ -1,0 +1,556 @@
+/* Reset básico e fontes */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f6;
+    color: #333;
+}
+
+header, footer {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    padding: 1em 2em;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0 0 0.5em 0;
+}
+
+.summary-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    background-color: #34495e;
+    padding: 0.5em;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+.summary-container p {
+    margin: 0.2em 0.5em;
+}
+
+main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+.main-controls {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#openExpenseModalBtn {
+    background-color: #27ae60;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+#openExpenseModalBtn:hover {
+    background-color: #229954;
+}
+
+/* Estilos para o Dialog */
+#expenseDialog {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    padding: 0;
+    width: 80%;
+    max-width: 700px;
+}
+#expenseDialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.form-section-dialog {
+    padding: 25px;
+}
+.form-section-dialog h2 {
+    margin-top: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+#expenseForm label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+#expenseForm input[type="text"],
+#expenseForm input[type="number"],
+#expenseForm input[type="date"],
+#expenseForm textarea,
+#expenseForm select {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+#expenseForm fieldset {
+    border: 1px solid #ddd;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+#expenseForm legend {
+    font-weight: bold;
+    color: #3498db;
+    padding: 0 5px;
+}
+.small-action-btn {
+    background-color: #95a5a6;
+    color: white;
+    padding: 6px 10px !important;
+    font-size: 0.9em !important;
+    margin-bottom: 10px !important;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.small-action-btn:hover {
+    background-color: #7f8c8d;
+}
+.form-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+.form-actions button {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+.form-actions button:hover {
+    background-color: #2980b9;
+}
+#cancelFormBtn {
+    background-color: #7f8c8d !important;
+}
+#cancelFormBtn:hover {
+    background-color: #6c7a7b !important;
+}
+#clearFormBtn {
+    background-color: #f39c12 !important;
+}
+#clearFormBtn:hover {
+    background-color: #e67e22 !important;
+}
+
+/* Abas de Navegação */
+.tabs-nav {
+    display: flex;
+    margin-bottom: 0; /* Ajustado para não ter margem e a borda do painel encostar */
+    border-bottom: 2px solid #3498db;
+}
+.tab-button {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    font-size: 1.1em;
+    color: #7f8c8d;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px; /* Para a borda do botão ativo sobrepor a borda da nav */
+    transition: color 0.3s, border-bottom-color 0.3s;
+}
+.tab-button:hover {
+    color: #2c3e50;
+}
+.tab-button.active {
+    color: #3498db;
+    font-weight: bold;
+    border-bottom-color: #3498db;
+}
+
+/* Painéis das Abas */
+.tab-pane {
+    display: none;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-top: none; /* A borda superior é a da nav */
+    border-radius: 0 0 8px 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    /* margin-top: -1px; Removido pois a borda da nav já define a linha */
+}
+.tab-pane.active {
+    display: block;
+}
+
+/* Filtro de Categoria na Lista de Despesas */
+.expenses-list-section h2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #2c3e50;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 0.3em;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+.category-filter-select {
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 0.9em;
+    background-color: #f9f9f9;
+}
+
+/* Aba de Calendário/Pagamentos Futuros */
+.calendar-view-section h2, .charts-section h2 {
+    color: #2c3e50;
+    border-bottom: 2px solid #27ae60;
+    padding-bottom: 0.3em;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+.calendar-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    border: 1px solid #e9ecef;
+}
+.calendar-filters label {
+    font-weight: bold;
+    color: #495057;
+}
+.calendar-filters input[type="date"], .calendar-filters select {
+    padding: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+.calendar-filters button {
+    padding: 8px 15px;
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+.calendar-filters button:hover {
+    background-color: #229954;
+}
+#upcomingPaymentsList .payment-entry {
+    background-color: #fff;
+    border: 1px solid #eee;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+#upcomingPaymentsList .payment-entry h4 {
+    margin: 0 0 5px 0;
+    color: #3498db;
+}
+#upcomingPaymentsList .payment-entry p {
+    margin: 3px 0;
+    font-size: 0.9em;
+    color: #555;
+}
+#upcomingPaymentsList .payment-entry .status-pago {
+    color: #27ae60;
+    font-weight: bold;
+}
+#upcomingPaymentsList .payment-entry .status-pendente {
+    color: #e67e22;
+    font-weight: bold;
+}
+.dashboard-total-display { /* Reutilizado aqui */
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px dashed #ccc;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #2c3e50;
+    text-align: right;
+}
+
+/* Aba de Gráficos */
+.charts-section .chart-container {
+    margin-bottom: 40px;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    background-color: #fdfdfd;
+}
+.charts-section .chart-container h3 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #333;
+}
+#categoryChart, #paymentStatusChart, #paymentsOverTimeChart {
+    max-width: 100%;
+    max-height: 400px;
+}
+
+/* Lista de Despesas - Estilos de Colapso */
+.expense-item {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.expense-summary {
+    position: relative;
+}
+.expense-item h3 {
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    color: #2c3e50;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.expense-item .category {
+    font-size: 0.8em;
+    background-color: #ecf0f1;
+    color: #7f8c8d;
+    padding: 3px 8px;
+    border-radius: 10px;
+    margin-left: 10px;
+    font-weight: normal;
+}
+.price-info {
+    font-size: 0.9em;
+    color: #555;
+    margin-bottom: 10px;
+}
+.price-info strong {
+    color: #333;
+}
+.progress-bar-container {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    margin: 10px 0;
+    height: 20px;
+    overflow: hidden;
+}
+.progress-bar {
+    width: 0%;
+    height: 100%;
+    background-color: #27ae60;
+    text-align: center;
+    line-height: 20px;
+    color: white;
+    font-size: 0.8em;
+    transition: width 0.5s ease-in-out;
+}
+.toggle-details-btn {
+    background-color: #ecf0f1;
+    color: #2c3e50;
+    border: 1px solid #bdc3c7;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85em;
+    margin-top: 10px;
+    display: inline-block;
+    transition: background-color 0.2s;
+}
+.toggle-details-btn:hover {
+    background-color: #d5dbdb;
+}
+.expense-details {
+    display: none;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px dashed #ccc;
+}
+.expense-item.expanded .expense-details {
+    display: block;
+}
+.expense-item.expanded .toggle-details-btn::after {
+    content: " ▲";
+}
+.expense-item:not(.expanded) .toggle-details-btn::after {
+    content: " ▼";
+}
+.details-section {}
+.details-section h4 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: #3498db;
+    font-size: 1em;
+}
+.details-section ul {
+    list-style: none;
+    padding-left: 0;
+    font-size: 0.9em;
+}
+.details-section ul li {
+    padding: 4px 0;
+}
+.details-section .vendor-item, .details-section .payment-item {
+    background-color: #f9f9f9;
+    padding: 8px 12px;
+    margin-bottom: 6px;
+    border-radius: 4px;
+    border: 1px solid #eee;
+}
+.payment-item.paid {
+    text-decoration: line-through;
+    background-color: #e8f5e9;
+    border-color: #c8e6c9;
+}
+.payment-item .payment-status-toggle {
+    margin-left: 10px;
+    padding: 3px 6px;
+    font-size: 0.8em;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    color: white;
+}
+.payment-item .payment-status-toggle.paid {
+    background-color: #e74c3c;
+    border-color: #c0392b;
+}
+.payment-item .payment-status-toggle.pendente {
+    background-color: #27ae60;
+    border-color: #1e8449;
+}
+.item-actions {
+    margin-top: 15px;
+    text-align: right;
+    padding-top: 10px;
+    border-top: 1px solid #f0f0f0;
+}
+.expense-item.expanded .item-actions {
+    border-top: none;
+}
+.item-actions button {
+    padding: 8px 12px;
+    font-size: 0.9em;
+    margin-left: 5px;
+}
+.item-actions button.edit-btn {
+    background-color: #f39c12;
+    color: white;
+    border:none; border-radius: 4px; cursor:pointer;
+}
+.item-actions button.edit-btn:hover {
+    background-color: #e67e22;
+}
+.item-actions button.delete-btn {
+    background-color: #e74c3c;
+    color: white;
+    border:none; border-radius: 4px; cursor:pointer;
+}
+.item-actions button.delete-btn:hover {
+    background-color: #c0392b;
+}
+
+/* Estilos para inputs de fornecedores e pagamentos dinâmicos */
+.dynamic-input-group {
+    border: 1px dashed #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    position: relative;
+    background-color: #fdfdfd;
+}
+.dynamic-input-group label {
+    font-size: 0.9em;
+    margin-bottom: 3px;
+}
+.dynamic-input-group input,
+.dynamic-input-group textarea,
+.dynamic-input-group select {
+    margin-bottom: 8px !important;
+    font-size: 0.95em !important;
+}
+.remove-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 12px;
+}
+.remove-btn:hover {
+    background-color: #c0392b;
+}
+
+footer {
+    margin-top: 30px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .summary-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .summary-container p { margin: 0.3em 0; }
+    header, main, footer { padding: 15px; }
+    #expenseDialog { width: 95%; max-width: 95%; }
+    .form-actions { flex-direction: column; gap: 10px; }
+    .form-actions button { width: 100%; }
+    .item-actions { text-align: center; }
+    .item-actions button { margin-bottom: 5px; }
+
+    .tabs-nav {
+        flex-wrap: wrap; /* Permite que os botões quebrem linha */
+        /* ou overflow-x: auto; para rolagem horizontal */
+    }
+    .tab-button {
+        flex-grow: 1; /* Faz os botões ocuparem espaço disponível */
+        text-align: center; /* Centraliza texto do botão na quebra */
+        border-bottom-width: 2px;
+        margin-bottom: 0;
+    }
+    .expenses-list-section h2 {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .category-filter-select {
+        margin-top: 10px;
+        width: 100%;
+    }
+    .calendar-filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .calendar-filters input, .calendar-filters select, .calendar-filters button {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}

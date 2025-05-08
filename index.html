@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Despesas do Casamento</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Gestor de Despesas do Casamento</h1>
+        <div class="summary-container">
+            <p>Estimado: <span id="totalEstimated">R$ 0,00</span></p>
+            <p>Real: <span id="totalActual">R$ 0,00</span></p>
+            <p>Pago: <span id="totalPaid">R$ 0,00</span></p>
+            <p>Restante: <span id="totalRemaining">R$ 0,00</span></p>
+        </div>
+    </header>
+
+    <main>
+        <div class="main-controls">
+            <button id="openExpenseModalBtn">Adicionar Nova Despesa</button>
+        </div>
+
+        <dialog id="expenseDialog">
+            <!-- ... (Conteúdo do dialog do formulário como antes) ... -->
+            <section class="form-section-dialog">
+                <h2>Adicionar/Editar Despesa</h2>
+                <form id="expenseForm">
+                    <input type="hidden" id="expenseId">
+
+                    <label for="itemName">Nome da Despesa:</label>
+                    <input type="text" id="itemName" required>
+
+                    <label for="itemCategory">Categoria:</label>
+                    <input type="text" id="itemCategory" list="categorySuggestions" placeholder="Ex: Buffet, Decoração">
+                    <datalist id="categorySuggestions">
+                        <!-- Opções de categoria serão populadas dinamicamente -->
+                    </datalist>
+
+                    <label for="estimatedPrice">Preço Estimado:</label>
+                    <input type="number" id="estimatedPrice" step="0.01" required>
+
+                    <label for="actualPrice">Preço Real (Final):</label>
+                    <input type="number" id="actualPrice" step="0.01">
+
+                    <fieldset id="vendorsContainer">
+                        <legend>Fornecedores</legend>
+                        <button type="button" id="addVendorBtn" class="small-action-btn">Adicionar Fornecedor</button>
+                    </fieldset>
+
+                    <fieldset id="paymentScheduleContainer">
+                        <legend>Cronograma de Pagamentos</legend>
+                        <button type="button" id="addPaymentBtn" class="small-action-btn">Adicionar Pagamento</button>
+                    </fieldset>
+
+                    <label for="itemNotes">Observações:</label>
+                    <textarea id="itemNotes" rows="3"></textarea>
+
+                    <div class="form-actions">
+                        <button type="submit">Salvar Despesa</button>
+                        <button type="button" id="cancelFormBtn">Cancelar</button>
+                        <button type="button" id="clearFormBtn" style="display:none;">Limpar Edição</button>
+                    </div>
+                </form>
+            </section>
+        </dialog>
+
+        <!-- ABAS DE NAVEGAÇÃO -->
+        <nav class="tabs-nav">
+            <button class="tab-button active" data-tab="expenses">Lista de Despesas</button>
+            <button class="tab-button" data-tab="calendar">Calendário de Pagamentos</button>
+            <button class="tab-button" data-tab="charts">Gráficos</button>
+        </nav>
+
+        <!-- CONTEÚDO DAS ABAS -->
+        <div id="tabContent">
+            <!-- ABA: LISTA DE DESPESAS -->
+            <section id="expensesTab" class="tab-pane active expenses-list-section">
+                <h2>
+                    Minhas Despesas
+                    <select id="categoryFilter" class="category-filter-select">
+                        <option value="all">Todas as Categorias</option>
+                        <!-- Categorias serão populadas aqui -->
+                    </select>
+                </h2>
+                <div id="expensesList">
+                    <!-- Despesas serão listadas aqui -->
+                </div>
+            </section>
+
+            <!-- ABA: CALENDÁRIO DE PAGAMENTOS -->
+            <section id="calendarTab" class="tab-pane calendar-view-section">
+                <h2>Calendário de Pagamentos (Próximos Vencimentos)</h2>
+                <div class="calendar-filters">
+                    <label for="filterStartDate">De:</label>
+                    <input type="date" id="filterStartDate">
+                    <label for="filterEndDate">Até:</label>
+                    <input type="date" id="filterEndDate">
+                    <label for="paymentStatusFilter">Status:</label>
+                    <select id="paymentStatusFilter">
+                        <option value="all">Todos</option>
+                        <option value="pendente">Pendente</option>
+                        <option value="pago">Pago</option>
+                    </select>
+                    <button id="applyDateFilterBtn">Filtrar</button>
+                </div>
+                <div id="upcomingPaymentsList">
+                    <!-- Pagamentos filtrados serão listados aqui -->
+                </div>
+                <div id="upcomingPaymentsTotal" class="dashboard-total-display" style="text-align:left; margin-top:10px;">
+                    Total no Período: R$ 0,00
+                </div>
+            </section>
+
+            <!-- ABA: GRÁFICOS -->
+            <section id="chartsTab" class="tab-pane charts-section">
+                <h2>Análise Gráfica</h2>
+                <div class="chart-container">
+                    <h3>Gastos por Categoria (Total Estimado)</h3>
+                    <canvas id="categoryChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>Pagamentos Realizados vs. Pendentes (Por Valor)</h3>
+                    <canvas id="paymentStatusChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>Evolução de Pagamentos (Mensal)</h3>
+                    <canvas id="paymentsOverTimeChart"></canvas>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2024 Local Platze</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
